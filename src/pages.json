@@ -81,24 +81,29 @@
 		}
 	],
 	"tabBar": {
-		"color": "#999999",
+		"color": "#8E8E93",
 		"selectedColor": "#3B82F6",
-		"backgroundColor": "#ffffff",
+		"backgroundColor": "#FFFFFF",
 		"borderStyle": "black",
+		"height": "50px",
+		"spacing": "2px",
 		"list": [
 			{
 				"pagePath": "pages/home/home",
-				"iconfontId": "337010",
+				"iconPath": "static/tabbar/home.svg",
+				"selectedIconPath": "static/tabbar/home-active.svg",
 				"text": "首页"
 			},
 			{
 				"pagePath": "pages/message/message",
-				"iconfontId": "337000",
+				"iconPath": "static/tabbar/message.svg",
+				"selectedIconPath": "static/tabbar/message-active.svg",
 				"text": "消息"
 			},
 			{
 				"pagePath": "pages/profile/profile",
-				"iconfontId": "337005",
+				"iconPath": "static/tabbar/profile.svg",
+				"selectedIconPath": "static/tabbar/profile-active.svg",
 				"text": "我的"
 			}
 		]

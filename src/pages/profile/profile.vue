@@ -87,8 +87,8 @@ const goToFavorites = () => {
 }
 
 const contactService = () => {
-  uni.makePhoneCall({
-    phoneNumber: '400-888-8888'
+  uni.navigateTo({
+    url: '/pages/profile/contact-customer-service'
   })
 }
 

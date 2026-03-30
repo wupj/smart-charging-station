@@ -111,9 +111,8 @@ const goBack = () => {
 }
 
 const addVehicle = () => {
-  uni.showToast({
-    title: '添加车辆功能',
-    icon: 'none'
+  uni.navigateTo({
+    url: '/pages/vehicles/add-vehicle'
   })
 }
 

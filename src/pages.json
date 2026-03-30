@@ -50,6 +50,12 @@
 			}
 		},
 		{
+			"path": "pages/vehicles/add-vehicle",
+			"style": {
+				"navigationBarTitleText": "添加车辆"
+			}
+		},
+		{
 			"path": "pages/vehicles/detail",
 			"style": {
 				"navigationBarTitleText": "车辆详情"
@@ -65,6 +71,12 @@
 			"path": "pages/profile/profile",
 			"style": {
 				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/profile/contact-customer-service",
+			"style": {
+				"navigationBarTitleText": "联系客服"
 			}
 		}
 	],

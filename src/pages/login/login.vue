@@ -71,8 +71,8 @@
       </view>
       <button
         class="weixin-btn"
-        open-type="getUserInfo"
-        @getuserinfo="handleWeixinLogin"
+        open-type="getPhoneNumber"
+        @getphonenumber="handleWeixinLogin"
       >
         <uni-icons type="weixin" size="20" color="#07c160"></uni-icons>
         <text class="weixin-text">微信一键登录</text>
@@ -221,7 +221,9 @@
 
   // 微信一键登录
   const handleWeixinLogin = (e: any) => {
-    if (e.detail.errMsg === 'getUserInfo:ok') {
+    console.log('微信登录事件:', e)
+
+    if (e.detail.errMsg === 'getPhoneNumber:ok') {
       isLoading.value = true
 
       // 获取微信登录code
@@ -229,9 +231,13 @@
         provider: 'weixin',
         success: loginRes => {
           if (loginRes.code) {
-            // 这里调用后端API获取用户信息
-            console.log('微信登录code:', loginRes.code)
+            // 获取到的手机号加密数据
+            const { encryptedData, iv } = e.detail
 
+            console.log('微信登录code:', loginRes.code)
+            console.log('手机号加密数据:', encryptedData)
+
+            // 这里应该将 code、encryptedData、iv 发送到后端进行解密
             // 模拟登录成功
             setTimeout(() => {
               uni.setStorageSync('token', 'weixin_token_' + Date.now())
@@ -260,9 +266,14 @@
           isLoading.value = false
         }
       })
+    } else if (e.detail.errMsg === 'getPhoneNumber:fail user deny') {
+      uni.showToast({
+        title: '用户拒绝授权',
+        icon: 'none'
+      })
     } else {
       uni.showToast({
-        title: '获取用户信息失败',
+        title: '获取手机号失败',
         icon: 'none'
       })
     }

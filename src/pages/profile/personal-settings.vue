@@ -3,14 +3,34 @@
     <!-- Settings List -->
     <view class="settings-section">
       <!-- Avatar -->
-      <view class="setting-item" @click="changeAvatar">
+      <view class="setting-item">
         <text class="setting-label">头像</text>
         <view class="setting-value">
+          <!-- #ifdef H5 -->
           <image
             class="avatar-small"
-            src="https://picsum.photos/seed/user-avatar/60/60.jpg"
+            :src="
+              avatarUrl || 'https://picsum.photos/seed/user-avatar/60/60.jpg'
+            "
             mode="aspectFill"
+            @click="changeAvatar"
           />
+          <!-- #endif -->
+          <!-- #ifdef MP-WEIXIN -->
+          <button
+            class="avatar-btn"
+            open-type="chooseAvatar"
+            @chooseavatar="onChooseAvatar"
+          >
+            <image
+              class="avatar-small"
+              :src="
+                avatarUrl || 'https://picsum.photos/seed/user-avatar/60/60.jpg'
+              "
+              mode="aspectFill"
+            />
+          </button>
+          <!-- #endif -->
           <uni-icons type="right" size="16" color="#c0c4cc"></uni-icons>
         </view>
       </view>
@@ -33,11 +53,25 @@
       </view>
 
       <!-- Nickname -->
-      <view class="setting-item" @click="editNickname">
+      <view class="setting-item">
         <text class="setting-label">昵称</text>
         <view class="setting-value">
-          <text class="value-text">小猪PQ</text>
-          <uni-icons type="right" size="16" color="#c0c4cc"></uni-icons>
+          <!-- #ifdef H5 -->
+          <view @click="editNickname">
+            <text class="value-text">{{ nickname || '小猪PQ' }}</text>
+            <uni-icons type="right" size="16" color="#c0c4cc"></uni-icons>
+          </view>
+          <!-- #endif -->
+          
+          <!-- #ifdef MP-WEIXIN -->
+          <input 
+            type="nickname" 
+            class="nickname-input" 
+            :value="nickname"
+            @input="onNicknameInput"
+            placeholder="请输入昵称"
+          />
+          <!-- #endif -->
         </view>
       </view>
 
@@ -59,38 +93,37 @@
 </template>
 
 <script setup lang="ts">
+  import { ref } from 'vue'
+
+  const avatarUrl = ref('')
+  const nickname = ref('')
+
+  const onChooseAvatar = (e: any) => {
+    const { avatarUrl: url } = e.detail
+    avatarUrl.value = url
+
+    uni.showToast({
+      title: '头像更换成功',
+      icon: 'success'
+    })
+
+    // 这里可以将头像上传到服务器
+    // uploadAvatar(url)
+  }
+
   const changeAvatar = () => {
-    // #ifdef H5
     uni.chooseImage({
       count: 1,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
-      success: _res => {
+      success: res => {
+        avatarUrl.value = res.tempFilePaths[0]
         uni.showToast({
           title: '头像更换成功',
           icon: 'success'
         })
       }
     })
-    // #endif
-
-    // #ifdef MP-WEIXIN
-    uni.getUserProfile({
-      desc: '用于完善会员资料',
-      success: _res => {
-        uni.showToast({
-          title: '获取微信头像成功',
-          icon: 'success'
-        })
-      },
-      fail: () => {
-        uni.showToast({
-          title: '获取头像失败',
-          icon: 'error'
-        })
-      }
-    })
-    // #endif
   }
 
   const editMemberName = () => {
@@ -110,6 +143,14 @@
     })
   }
 
+  const onNicknameInput = (e: any) => {
+    nickname.value = e.detail.value
+    uni.showToast({
+      title: '昵称修改成功',
+      icon: 'success'
+    })
+  }
+  
   const editNickname = () => {
     // #ifdef H5
     uni.showModal({
@@ -118,6 +159,7 @@
       placeholderText: '请输入昵称',
       success: res => {
         if (res.confirm && res.content) {
+          nickname.value = res.content
           uni.showToast({
             title: '修改成功',
             icon: 'success'
@@ -128,21 +170,7 @@
     // #endif
 
     // #ifdef MP-WEIXIN
-    uni.getUserProfile({
-      desc: '用于完善会员资料',
-      success: _res => {
-        uni.showToast({
-          title: '获取微信昵称成功',
-          icon: 'success'
-        })
-      },
-      fail: () => {
-        uni.showToast({
-          title: '获取昵称失败',
-          icon: 'error'
-        })
-      }
-    })
+    // 微信小程序使用input的nickname，不需要在这里处理
     // #endif
   }
 
@@ -229,6 +257,18 @@
         margin-right: 16rpx;
       }
 
+      .avatar-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+        border: none;
+
+        &::after {
+          border: none;
+        }
+      }
+
       .value-text {
         font-size: 30rpx;
         color: #7f8c8d;
@@ -237,6 +277,14 @@
         &.placeholder {
           color: #3498db;
         }
+      }
+      
+      .nickname-input {
+        font-size: 30rpx;
+        color: #7f8c8d;
+        text-align: right;
+        flex: 1;
+        margin-right: 16rpx;
       }
     }
   }

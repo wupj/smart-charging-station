@@ -1,6 +1,7 @@
 <template>
   <view class="detail-container">
     <!-- Header -->
+    <!-- #ifdef H5 -->
     <view class="header">
       <view class="header-left" @click="goBack">
         <view class="back-button">
@@ -10,6 +11,7 @@
       <text class="header-title">详情</text>
       <text class="header-distance">59KM</text>
     </view>
+    <!-- #endif -->
 
     <!-- Station Info -->
     <view class="station-info">

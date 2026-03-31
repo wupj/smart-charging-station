@@ -1,6 +1,7 @@
 <template>
   <view class="vehicle-detail-container">
     <!-- Header -->
+    <!-- #ifdef H5 -->
     <view class="header">
       <view class="header-left" @click="goBack">
         <view class="back-button">
@@ -10,6 +11,7 @@
       <text class="header-title">车辆详情</text>
       <view class="header-right"></view>
     </view>
+    <!-- #endif -->
 
     <!-- Content -->
     <scroll-view scroll-y class="detail-content">
@@ -118,7 +120,7 @@
     chargingPower: '11'
   })
 
-  onLoad(options => {
+  onLoad((options: any) => {
     if (options.id) {
       vehicleId.value = parseInt(options.id)
       // In real app, fetch vehicle details based on ID

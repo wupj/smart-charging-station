@@ -1,6 +1,7 @@
 <template>
   <view class="message-detail-container">
     <!-- Header -->
+    <!-- #ifdef H5 -->
     <view class="header">
       <view class="header-left" @click="goBack">
         <view class="back-button">
@@ -10,6 +11,7 @@
       <text class="header-title">消息详情</text>
       <view class="header-right"></view>
     </view>
+    <!-- #endif -->
 
     <!-- Message Content -->
     <scroll-view scroll-y class="message-content">

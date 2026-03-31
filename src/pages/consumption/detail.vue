@@ -1,6 +1,7 @@
 <template>
   <view class="consumption-detail-container">
     <!-- Header -->
+    <!-- #ifdef H5 -->
     <view class="header">
       <view class="header-left" @click="goBack">
         <view class="back-button">
@@ -10,6 +11,7 @@
       <text class="header-title">消费详情</text>
       <view class="header-right"></view>
     </view>
+    <!-- #endif -->
 
     <!-- Content -->
     <scroll-view scroll-y class="detail-content">
@@ -123,7 +125,7 @@
     status: 'success'
   })
 
-  onLoad(options => {
+  onLoad((options: any) => {
     if (options.id) {
       recordId.value = parseInt(options.id)
       // In real app, fetch record details based on ID

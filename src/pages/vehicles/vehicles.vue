@@ -1,6 +1,7 @@
 <template>
   <view class="vehicles-container">
     <!-- Header -->
+    <!-- #ifdef H5 -->
     <view class="header">
       <view class="header-left" @click="goBack">
         <view class="back-button">
@@ -12,6 +13,7 @@
         <uni-icons type="plus-filled" size="24" color="#3498db"></uni-icons>
       </view>
     </view>
+    <!-- #endif -->
 
     <!-- Vehicles List -->
     <scroll-view scroll-y class="vehicles-list">

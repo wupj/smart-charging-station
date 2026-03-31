@@ -1,6 +1,7 @@
 <template>
   <view class="add-vehicle-container">
     <!-- Header -->
+    <!-- #ifdef H5 -->
     <view class="header">
       <view class="header-left" @click="goBack">
         <view class="back-button">
@@ -10,6 +11,7 @@
       <text class="header-title">添加车辆</text>
       <view class="header-right"></view>
     </view>
+    <!-- #endif -->
 
     <!-- Content -->
     <view class="content">

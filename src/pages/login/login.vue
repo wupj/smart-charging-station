@@ -179,7 +179,7 @@ const handleLogin = async () => {
 
     setTimeout(() => {
       uni.reLaunch({
-        url: '/pages/index/index'
+        url: '/pages/home/home'
       })
     }, 1500)
   } catch (error: any) {
@@ -242,7 +242,7 @@ const handleWeixinLogin = (e: any) => {
 
             setTimeout(() => {
               uni.reLaunch({
-                url: '/pages/index/index'
+                url: '/pages/home/home'
               })
             }, 1500)
           }, 1000)

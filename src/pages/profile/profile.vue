@@ -61,9 +61,8 @@
 
 <script setup lang="ts">
 const openSettings = () => {
-  uni.showToast({
-    title: '打开设置',
-    icon: 'none'
+  uni.navigateTo({
+    url: '/pages/profile/personal-settings'
   })
 }
 

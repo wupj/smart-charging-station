@@ -78,6 +78,12 @@
 			"style": {
 				"navigationBarTitleText": "联系客服"
 			}
+		},
+		{
+			"path": "pages/profile/personal-settings",
+			"style": {
+				"navigationBarTitleText": "个人设置"
+			}
 		}
 	],
 	"tabBar": {
@@ -90,20 +96,20 @@
 		"list": [
 			{
 				"pagePath": "pages/home/home",
-				"iconPath": "static/tabbar/home.svg",
-				"selectedIconPath": "static/tabbar/home-active.svg",
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/home-active.png",
 				"text": "首页"
 			},
 			{
 				"pagePath": "pages/message/message",
-				"iconPath": "static/tabbar/message.svg",
-				"selectedIconPath": "static/tabbar/message-active.svg",
+				"iconPath": "static/tabbar/message.png",
+				"selectedIconPath": "static/tabbar/message-active.png",
 				"text": "消息"
 			},
 			{
 				"pagePath": "pages/profile/profile",
-				"iconPath": "static/tabbar/profile.svg",
-				"selectedIconPath": "static/tabbar/profile-active.svg",
+				"iconPath": "static/tabbar/profile.png",
+				"selectedIconPath": "static/tabbar/profile-active.png",
 				"text": "我的"
 			}
 		]

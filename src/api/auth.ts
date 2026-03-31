@@ -50,7 +50,9 @@ export const login = (params: LoginParams): Promise<LoginResponse> => {
  * @param params 微信登录参数
  * @returns 登录响应
  */
-export const weixinLogin = (params: WeixinLoginParams): Promise<LoginResponse> => {
+export const weixinLogin = (
+  params: WeixinLoginParams
+): Promise<LoginResponse> => {
   return request({
     url: '/api/auth/weixin-login',
     method: 'POST',

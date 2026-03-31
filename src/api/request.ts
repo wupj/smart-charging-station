@@ -88,9 +88,7 @@ const request = (options: any) => {
     uni.request({
       ...options,
       success: (res: any) => {
-        responseInterceptor(res)
-          .then(resolve)
-          .catch(reject)
+        responseInterceptor(res).then(resolve).catch(reject)
       },
       fail: errorHandler
     })

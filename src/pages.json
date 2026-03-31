@@ -85,6 +85,13 @@
       "style": {
         "navigationBarTitleText": "个人设置"
       }
+    },
+    {
+      "path": "pages/map/map",
+      "style": {
+        "navigationBarTitleText": "地图",
+        "navigationStyle": "custom"
+      }
     }
   ],
   "tabBar": {

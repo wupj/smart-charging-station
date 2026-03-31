@@ -3,13 +3,21 @@
     <!-- Search Bar -->
     <view class="search-section">
       <view class="search-bar">
-        <uni-icons type="search" size="18" color="#95a5a6"></uni-icons>
-        <input
-          class="search-input"
-          placeholder="搜索充电站"
-          v-model="searchKeyword"
-          @input="handleSearch"
-        />
+        <view class="search-left" @click="getLocation">
+          <uni-icons type="location-filled" size="18" color="#3498db"></uni-icons>
+        </view>
+        <view class="search-center">
+          <uni-icons type="search" size="18" color="#95a5a6"></uni-icons>
+          <input
+            class="search-input"
+            placeholder="搜索充电站"
+            v-model="searchKeyword"
+            @input="handleSearch"
+          />
+        </view>
+        <view class="search-right" @click="scanCode">
+          <uni-icons type="scan" size="18" color="#3498db"></uni-icons>
+        </view>
       </view>
     </view>
 
@@ -190,6 +198,59 @@
     // Search logic is handled by computed property
   }
 
+  const getLocation = () => {
+  uni.navigateTo({
+    url: '/pages/map/map'
+  })
+}
+
+  const scanCode = () => {
+  // #ifdef H5
+  uni.showToast({
+    title: 'H5环境不支持扫码',
+    icon: 'none'
+  })
+  // #endif
+  
+  // #ifdef MP-WEIXIN
+  uni.scanCode({
+    success: _res => {
+      // Handle scan result
+      console.log('扫码结果:', _res.result)
+      uni.showToast({
+        title: '扫码成功',
+        icon: 'success'
+      })
+    },
+    fail: () => {
+      uni.showToast({
+        title: '扫码失败',
+        icon: 'error'
+      })
+    }
+  })
+  // #endif
+  
+  // #ifdef APP-PLUS
+  uni.scanCode({
+    success: _res => {
+      // Handle scan result
+      console.log('扫码结果:', _res.result)
+      uni.showToast({
+        title: '扫码成功',
+        icon: 'success'
+      })
+    },
+    fail: () => {
+      uni.showToast({
+        title: '扫码失败',
+        icon: 'error'
+      })
+    }
+  })
+  // #endif
+}
+
   const setFilter = (filter: string) => {
     activeFilter.value = filter
   }
@@ -217,20 +278,51 @@
       align-items: center;
       background: #f8f9fa;
       border-radius: 50rpx;
-      padding: 0 32rpx;
       height: 72rpx;
+      overflow: hidden;
 
-      .search-icon {
-        font-size: 32rpx;
-        color: #95a5a6;
-        margin-right: 16rpx;
+      .search-left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20rpx;
+        
+        &:active {
+          opacity: 0.7;
+        }
       }
 
-      .search-input {
+      .search-center {
         flex: 1;
-        font-size: 28rpx;
-        height: 48rpx;
-        line-height: 48rpx;
+        display: flex;
+        align-items: center;
+        padding: 0 16rpx;
+        
+        .search-icon {
+          font-size: 32rpx;
+          color: #95a5a6;
+          margin-right: 16rpx;
+        }
+
+        .search-input {
+          flex: 1;
+          font-size: 28rpx;
+          color: #2c3e50;
+          background: transparent;
+          border: none;
+          outline: none;
+        }
+      }
+
+      .search-right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20rpx;
+        
+        &:active {
+          opacity: 0.7;
+        }
       }
     }
   }

@@ -93,8 +93,8 @@
 
   // 表单数据
   const formData = ref({
-    phone: '',
-    password: ''
+    phone: '13800138000',
+    password: '123456'
   })
 
   // 状态变量
